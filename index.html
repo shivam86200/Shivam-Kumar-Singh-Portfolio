@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shivam Singh Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Scripts for 3D Globe and Charts -->
+    <script src="https://unpkg.com/three"></script>
+    <script src="https://unpkg.com/globe.gl"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body data-theme="dark">
+    <!-- SCROLL PROGRESS BAR -->
+    <div id="scroll-progress" style="position: fixed; top: 0; left: 0; height: 4px; background: linear-gradient(90deg, #6366f1, #ec4899); z-index: 10000; width: 0%;"></div>
+
+    <!-- BOOT LOADER -->
+    <div id="boot-loader">
+        <div class="terminal-loader">
+            <span class="glitch" data-text="Initializing security system...">Initializing security system...</span><br>
+            <span id="load-msg-1" style="display:none; color:#0f0;">[OK] Modules loaded</span><br>
+            <span id="load-msg-2" style="display:none; color:#ffbd2e;">[WARN] Bypassing firewall...</span><br>
+            <span id="load-msg-3" style="display:none; color:#27c93f;">[SUCCESS] Access Granted.</span>
+        </div>
+    </div>
+
+    <!-- CUSTOM CURSOR -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-glow"></div>
+
+    <!-- MATRIX BACKGROUND -->
+    <canvas id="matrix-canvas"></canvas>
+    <!-- PARTICLES BACKGROUND -->
+    <div id="tsparticles"></div>
+
+    <header class="navbar" style="padding: 15px 8%; border-bottom: none; background: #1a1625; box-shadow: 0 4px 30px rgba(0,0,0,0.5);">
+        <div class="logo" style="display: flex; align-items: center; gap: 12px;">
+            <!-- Text Shivam. -->
+            <span style="color: #c084fc; font-weight: 800; font-size: 1.8rem; letter-spacing: 0.5px;">Shivam<span style="color: #e879f9;">.</span></span>
+        </div>
+        <div class="menu-btn" id="menu-btn" style="display: none; font-size: 1.5rem; color: white; cursor: pointer;">
+            <i class="fas fa-bars"></i>
+        </div>
+        <nav>
+            <ul id="nav-list" style="gap: 25px; align-items: center; list-style: none;" class="nav-links">
+                <li><a href="#home" style="color: white; font-weight: 600; font-size: 1rem;">Home</a></li>
+                <li><a href="#about" style="color: white; font-weight: 600; font-size: 1rem;">About</a></li>
+                <li><a href="#skills" style="color: white; font-weight: 600; font-size: 1rem;">Skills</a></li>
+                <li><a href="#projects" style="color: white; font-weight: 600; font-size: 1rem;">Projects</a></li>
+                <li><a href="#services" style="color: white; font-weight: 600; font-size: 1rem;">Services</a></li>
+                <li><a href="#contact" style="color: white; font-weight: 600; font-size: 1rem;">Contact</a></li>
+                <li>
+                    <button id="theme-toggle" class="icon-btn magnetic" aria-label="Toggle Theme" style="background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%); border: none; width: 40px; height: 40px; border-radius: 50%; box-shadow: 0 0 15px rgba(168, 85, 247, 0.4); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s;" onmouseover="this.style.boxShadow='0 0 25px rgba(168, 85, 247, 0.6)'" onmouseout="this.style.boxShadow='0 0 15px rgba(168, 85, 247, 0.4)'">
+                        <i class="fas fa-sun" style="color: #facc15; font-size: 1.2rem;"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <!-- HERO SECTION -->
+    <section class="hero" id="home" style="background: radial-gradient(circle at 70% 30%, rgba(99, 102, 241, 0.15) 0%, transparent 60%), linear-gradient(135deg, #0b0b16 0%, #15152a 100%); position: relative; overflow: hidden; min-height: 100vh; display: flex; align-items: center; justify-content: space-between; padding: 0 5%;">
+        
+        <!-- Background Bubbles -->
+        <div style="position: absolute; top: 15%; right: 25%; width: 120px; height: 120px; background: rgba(255,255,255,0.25); border-radius: 50%; filter: blur(2px); animation: float 8s ease-in-out infinite;"></div>
+        <div style="position: absolute; top: 35%; right: 20%; width: 80px; height: 80px; background: rgba(255,255,255,0.2); border-radius: 50%; filter: blur(2px); animation: float 6s ease-in-out infinite reverse;"></div>
+        <div style="position: absolute; top: 10%; left: 10%; width: 100px; height: 100px; background: rgba(255,255,255,0.1); border-radius: 50%; filter: blur(10px);"></div>
+
+        <div class="hero-left" style="max-width: 650px; z-index: 2;">
+            <p class="gsap-reveal" style="color: #e2e8f0; font-weight: 500; letter-spacing: 2px; margin-bottom: 10px; font-size: 1.1rem; text-transform: uppercase;">Hello, I'm</p>
+            <h1 class="gsap-reveal" style="color: #facc15; margin-bottom: 15px; text-shadow: 2px 5px 15px rgba(0,0,0,0.15);">
+                <span class="glitch" data-text="Shivam" style="display: block;">Shivam</span>
+                <span class="glitch" data-text="Kumar" style="display: block;">Kumar</span>
+            </h1>
+            
+            <h2 class="gsap-reveal" style="font-size: 2.5rem; font-weight: 700; color: white; margin-bottom: 40px; min-height: 6rem; height: auto;">
+                <span id="typing" class="typing-text"></span><span class="cursor">|</span>
+            </h2>
+            
+
+            
+            <div class="hero-buttons gsap-reveal" style="display: flex; gap: 20px; align-items: center; margin-top: 40px;">
+                <a href="https://drive.google.com/uc?export=download&id=1R9wIJjWY1BVURpzHp1_k3Ow2MaR2oXha" target="_blank" style="background: linear-gradient(135deg, #6366f1, #a855f7); color: white; padding: 15px 32px; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 1rem; display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3); transition: all 0.3s;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 15px 35px rgba(99, 102, 241, 0.5)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 25px rgba(99, 102, 241, 0.3)'">📄 DOWNLOAD RESUME</a>
+                
+                <button onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 15px 32px; border-radius: 50px; cursor: pointer; font-weight: 600; font-size: 1rem; display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); backdrop-filter: blur(10px); transition: all 0.3s; font-family: inherit;" onmouseover="this.style.transform='translateY(-5px)'; this.style.background='rgba(255,255,255,0.1)'; this.style.borderColor='rgba(99, 102, 241, 0.5)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='rgba(255,255,255,0.05)'; this.style.borderColor='rgba(255,255,255,0.1)'">🚀 VIEW PROJECTS</button>
+            </div>
+
+            <!-- Terminal UI Game Changer -->
+            <div class="gsap-reveal" style="margin-top: 40px; background: #0c0c14; border: 1px solid #334155; border-radius: 8px; width: 100%; max-width: 480px; box-shadow: 0 15px 35px rgba(0,0,0,0.5); overflow: hidden; position: relative;">
+                <div style="background: #1e293b; padding: 10px 15px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #334155;">
+                    <span style="width: 12px; height: 12px; background: #ef4444; border-radius: 50%;"></span>
+                    <span style="width: 12px; height: 12px; background: #facc15; border-radius: 50%;"></span>
+                    <span style="width: 12px; height: 12px; background: #22c55e; border-radius: 50%;"></span>
+                    <span style="color: #94a3b8; font-size: 0.85rem; margin-left: 10px; font-family: monospace;">guest@portfolio:~</span>
+                </div>
+                <div style="padding: 15px; font-family: monospace; font-size: 0.95rem; color: #a1a1aa; height: 100px;">
+                    <div style="color: white; margin-bottom: 5px;">&gt; <span id="hero-cmd"></span><span id="hero-cursor" class="cursor" style="color: white;">_</span></div>
+                    <div id="hero-out" style="color: #22c55e; opacity: 0; transition: opacity 0.3s; font-weight: bold;"></div>
+                </div>
+                <script>
+                    setTimeout(() => {
+                        const cmdEl = document.getElementById('hero-cmd');
+                        const outEl = document.getElementById('hero-out');
+                        const cursor = document.getElementById('hero-cursor');
+                        const command = "whoami";
+                        let i = 0;
+                        function typeCmd() {
+                            if(i < command.length) {
+                                cmdEl.innerHTML += command.charAt(i);
+                                i++;
+                                setTimeout(typeCmd, 100);
+                            } else {
+                                setTimeout(() => {
+                                    cursor.style.display = 'none';
+                                    outEl.innerHTML = "Shivam Kumar - Cybersecurity Enthusiast & Software Developer";
+                                    outEl.style.opacity = '1';
+                                }, 400);
+                            }
+                        }
+                        typeCmd();
+                    }, 2500);
+                </script>
+            </div>
+
+        <div class="gsap-reveal" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})" style="position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; z-index: 10; cursor: pointer; transition: opacity 0.3s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
+            <div style="width: 24px; height: 42px; border: 2px solid white; border-radius: 20px; display: flex; justify-content: center; padding-top: 6px;">
+                <div style="width: 4px; height: 8px; background: white; border-radius: 4px; animation: bounce 2s infinite;"></div>
+            </div>
+            <span style="color: white; font-size: 0.85rem; margin-top: 10px; font-weight: 500;">Scroll Down</span>
+        </div>
+        </div>
+        
+        <div class="hero-right gsap-reveal" style="z-index: 2; width: 100%; max-width: 500px; height: 500px; display: flex; justify-content: center; align-items: center; position: relative;">
+            <!-- Circle Track -->
+            <div style="width: 100%; max-width: 450px; aspect-ratio: 1; border-radius: 50%; border: 1px solid rgba(255,255,255,0.2); position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+            
+            <!-- Center Core -->
+            <div style="text-align: center; z-index: 10; animation: float 5s ease-in-out infinite 1s;">
+                <i class="fas fa-shield-alt" style="font-size: 5rem; color: #38bdf8; text-shadow: 0 0 30px rgba(56, 189, 248, 0.8); margin-bottom: 10px;"></i>
+                <h3 style="color: white; font-size: 1.8rem; font-weight: 800; text-shadow: 0 2px 10px rgba(0,0,0,0.3);">Cybersecurity</h3>
+            </div>
+            
+            <!-- Orbiting Glass Cards -->
+            <div style="position: absolute; top: 10%; right: 10%; animation: float 6s ease-in-out infinite;">
+                <div style="background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid rgba(99, 102, 241, 0.2); padding: 16px 28px; border-radius: 16px; display: flex; align-items: center; gap: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); transition: all 0.3s; cursor: pointer;" onmouseover="this.style.transform='scale(1.1)'; this.style.borderColor='rgba(99, 102, 241, 0.8)'; this.style.boxShadow='0 15px 35px rgba(99, 102, 241, 0.3)'" onmouseout="this.style.transform='scale(1)'; this.style.borderColor='rgba(99, 102, 241, 0.2)'; this.style.boxShadow='0 10px 30px rgba(0,0,0,0.3)'">
+                    <i class="fas fa-bolt" style="color: #facc15; font-size: 1.5rem;"></i>
+                    <span style="color: white; font-weight: 700; font-size: 1.1rem;">C++</span>
+                </div>
+            </div>
+            
+            <div style="position: absolute; bottom: 35%; right: 0%; animation: float 5s ease-in-out infinite reverse;">
+                <div style="background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid rgba(56, 189, 248, 0.2); padding: 16px 28px; border-radius: 16px; display: flex; align-items: center; gap: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); transition: all 0.3s; cursor: pointer;" onmouseover="this.style.transform='scale(1.1)'; this.style.borderColor='rgba(56, 189, 248, 0.8)'; this.style.boxShadow='0 15px 35px rgba(56, 189, 248, 0.3)'" onmouseout="this.style.transform='scale(1)'; this.style.borderColor='rgba(56, 189, 248, 0.2)'; this.style.boxShadow='0 10px 30px rgba(0,0,0,0.3)'">
+                    <i class="fas fa-network-wired" style="color: #38bdf8; font-size: 1.5rem;"></i>
+                    <span style="color: white; font-weight: 700; font-size: 1.1rem;">Nmap</span>
+                </div>
+            </div>
+            
+            <div style="position: absolute; bottom: 10%; left: 30%; animation: float 7s ease-in-out infinite;">
+                <div style="background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid rgba(96, 165, 250, 0.2); padding: 16px 28px; border-radius: 16px; display: flex; align-items: center; gap: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); transition: all 0.3s; cursor: pointer;" onmouseover="this.style.transform='scale(1.1)'; this.style.borderColor='rgba(96, 165, 250, 0.8)'; this.style.boxShadow='0 15px 35px rgba(96, 165, 250, 0.3)'" onmouseout="this.style.transform='scale(1)'; this.style.borderColor='rgba(96, 165, 250, 0.2)'; this.style.boxShadow='0 10px 30px rgba(0,0,0,0.3)'">
+                    <i class="fas fa-wave-square" style="color: #60a5fa; font-size: 1.5rem;"></i>
+                    <span style="color: white; font-weight: 700; font-size: 1.1rem;">Wireshark</span>
+                </div>
+            </div>
+            
+            <div style="position: absolute; top: 45%; left: 0%; animation: float 6s ease-in-out infinite 2s;">
+                <div style="background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid rgba(244, 63, 94, 0.2); padding: 16px 28px; border-radius: 16px; display: flex; align-items: center; gap: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); transition: all 0.3s; cursor: pointer;" onmouseover="this.style.transform='scale(1.1)'; this.style.borderColor='rgba(244, 63, 94, 0.8)'; this.style.boxShadow='0 15px 35px rgba(244, 63, 94, 0.3)'" onmouseout="this.style.transform='scale(1)'; this.style.borderColor='rgba(244, 63, 94, 0.2)'; this.style.boxShadow='0 10px 30px rgba(0,0,0,0.3)'">
+                    <i class="fas fa-spider" style="color: #f43f5e; font-size: 1.5rem;"></i>
+                    <span style="color: white; font-weight: 700; font-size: 1.1rem;">Burp Suite</span>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            @keyframes bounce {
+                0%, 100% { transform: translateY(0); opacity: 1; }
+                50% { transform: translateY(10px); opacity: 0.5; }
+            }
+            @keyframes float {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-15px); }
+            }
+        </style>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="about" id="about">
+        <h2 class="gsap-fade heading-gradient">About Me</h2>
+        <div class="about-container">
+            <img src="./assets/profile.png" alt="profile" class="profile gsap-fade-right">
+            <div class="about-text gsap-fade-left">
+                <h3 style="font-size: 2rem; margin-bottom: 20px; color: #ffffff;">Hello! I'm <span style="color: #9b5cff;">Shivam Kumar Singh</span></h3>
+                <p style="color: #a1a1aa; font-size: 1.05rem; line-height: 1.6; margin-bottom: 20px;">I am a Computer Science student with a strong interest in both Software Engineering and Cybersecurity. I focus on building efficient, scalable applications while ensuring they are secure by design. My work combines software development with cybersecurity principles to create systems that are both efficient and resilient.</p>
+                <p style="color: #a1a1aa; font-size: 1.05rem; line-height: 1.6; margin-bottom: 20px;">I have hands-on experience in penetration testing, network security, and vulnerability assessment, along with strong programming skills in Python and C++. I actively apply these skills to identify weaknesses, strengthen systems, and develop secure solutions.</p>
+                <p style="color: #a1a1aa; font-size: 1.05rem; line-height: 1.6; margin-bottom: 30px;">Driven by curiosity and a passion for problem-solving, I have completed over 72 hands-on cybersecurity labs on TryHackMe, gaining practical exposure to real-world attack and defense scenarios.</p>
+                <!-- Education & Focus Cards -->
+                <div class="cards-grid" style="display: grid; gap: 20px; margin-top: 30px; margin-bottom: 20px;">
+                    <!-- Education Card -->
+                    <div class="magnetic" style="background: #1e202a; border: 1px solid rgba(255,255,255,0.05); padding: 25px; border-radius: 16px; display: flex; align-items: flex-start; gap: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                        <div style="background: linear-gradient(135deg, #7a84ff, #8e6cfb); width: 60px; height: 60px; border-radius: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 0 20px rgba(122, 132, 255, 0.4);">
+                            <i class="fas fa-graduation-cap" style="font-size: 1.8rem; color: #ffffff;"></i>
+                        </div>
+                        <div>
+                            <span style="color: #64748b; font-weight: 700; font-size: 1.1rem; display: block; margin-bottom: 5px;">Education</span>
+                            <span style="color: #818cf8; font-weight: 700; font-size: 1.15rem; display: block; margin-bottom: 10px;">B.Tech CSE (Data<br>Analytics)</span>
+                            <span style="color: #94a3b8; font-size: 0.95rem; font-weight: 500;">Lovely Professional<br>University</span>
+                        </div>
+                    </div>
+                    <!-- Focus Card -->
+                    <div class="magnetic" style="background: #1e202a; border: 1px solid rgba(255,255,255,0.05); padding: 25px; border-radius: 16px; display: flex; align-items: flex-start; gap: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                        <div style="background: linear-gradient(135deg, #f472b6, #8e6cfb); width: 60px; height: 60px; border-radius: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 0 20px rgba(244, 114, 182, 0.4);">
+                            <i class="fas fa-bullseye" style="font-size: 1.8rem; color: #ffffff;"></i>
+                        </div>
+                        <div>
+                            <span style="color: #64748b; font-weight: 700; font-size: 1.1rem; display: block; margin-bottom: 5px;">Focus</span>
+                            <span style="color: #818cf8; font-weight: 700; font-size: 1.15rem; display: block; margin-bottom: 10px;">Cybersecurity</span>
+                            <span style="color: #94a3b8; font-size: 0.95rem; font-weight: 500;">Network Security, Threat<br>Analysis, Pentesting</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: rgba(15, 23, 42, 0.8); border-left: 4px solid #a855f7; padding: 25px 30px; border-radius: 8px; margin-top: 10px; margin-bottom: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+                    <h4 style="color: white; font-size: 1.3rem; margin-bottom: 15px;">What Makes Me Different</h4>
+                    <div class="what-makes-grid" style="display: grid; gap: 15px;">
+                        <span style="color: #cbd5e1; font-size: 0.95rem; display: flex; align-items: center; gap: 10px;"><i class="fas fa-check-circle" style="color: #a855f7;"></i> Security-first development mindset</span>
+                        <span style="color: #cbd5e1; font-size: 0.95rem; display: flex; align-items: center; gap: 10px;"><i class="fas fa-check-circle" style="color: #a855f7;"></i> Hands-on lab experience (72+ labs)</span>
+                        <span style="color: #cbd5e1; font-size: 0.95rem; display: flex; align-items: center; gap: 10px;"><i class="fas fa-check-circle" style="color: #a855f7;"></i> Strong foundation in DSA + Systems</span>
+                        <span style="color: #cbd5e1; font-size: 0.95rem; display: flex; align-items: center; gap: 10px;"><i class="fas fa-check-circle" style="color: #a855f7;"></i> Passion for real-world problem solving</span>
+                    </div>
+                </div>
+
+                <div class="stats" style="gap: 20px;">
+                    <div class="stat magnetic" style="background: linear-gradient(135deg, #7a84ff, #8e6cfb); padding: 30px 15px; border-radius: 16px; text-align: center; box-shadow: 0 10px 30px rgba(122, 132, 255, 0.25); transition: transform 0.3s, box-shadow 0.3s; cursor: pointer;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 15px 40px rgba(122, 132, 255, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 30px rgba(122, 132, 255, 0.25)'">
+                        <span class="stat-num" style="display: block; font-size: 2.4rem; font-weight: 800; color: #1e293b; margin-bottom: 8px;">5+</span>
+                        <span class="stat-label" style="display: block; font-size: 0.85rem; font-weight: 600; color: #475569; letter-spacing: 1.5px; text-transform: uppercase;">Projects</span>
+                    </div>
+                    <div class="stat magnetic" style="background: linear-gradient(135deg, #7a84ff, #8e6cfb); padding: 30px 15px; border-radius: 16px; text-align: center; box-shadow: 0 10px 30px rgba(122, 132, 255, 0.25); transition: transform 0.3s, box-shadow 0.3s; cursor: pointer;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 15px 40px rgba(122, 132, 255, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 30px rgba(122, 132, 255, 0.25)'">
+                        <span class="stat-num" style="display: block; font-size: 2.4rem; font-weight: 800; color: #1e293b; margin-bottom: 8px;">8+</span>
+                        <span class="stat-label" style="display: block; font-size: 0.85rem; font-weight: 600; color: #475569; letter-spacing: 1.5px; text-transform: uppercase;">Certificates</span>
+                    </div>
+                    <div class="stat magnetic" style="background: linear-gradient(135deg, #7a84ff, #8e6cfb); padding: 30px 15px; border-radius: 16px; text-align: center; box-shadow: 0 10px 30px rgba(122, 132, 255, 0.25); transition: transform 0.3s, box-shadow 0.3s; cursor: pointer;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 15px 40px rgba(122, 132, 255, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 30px rgba(122, 132, 255, 0.25)'">
+                        <span class="stat-num" style="display: block; font-size: 2.4rem; font-weight: 800; color: #1e293b; margin-bottom: 8px;">100+</span>
+                        <span class="stat-label" style="display: block; font-size: 0.85rem; font-weight: 600; color: #475569; letter-spacing: 1.5px; text-transform: uppercase;">Hours Coding</span>
+                    </div>
+                    <div class="stat magnetic" style="background: linear-gradient(135deg, #7a84ff, #8e6cfb); padding: 30px 15px; border-radius: 16px; text-align: center; box-shadow: 0 10px 30px rgba(122, 132, 255, 0.25); transition: transform 0.3s, box-shadow 0.3s; cursor: pointer;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 15px 40px rgba(122, 132, 255, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 30px rgba(122, 132, 255, 0.25)'">
+                        <span class="stat-num" style="display: block; font-size: 2.4rem; font-weight: 800; color: #1e293b; margin-bottom: 8px;">90%</span>
+                        <span class="stat-label" style="display: block; font-size: 0.85rem; font-weight: 600; color: #475569; letter-spacing: 1.5px; text-transform: uppercase;">Success Rate</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECURITY EXPERIENCE & LABS SECTION -->
+    <section class="security-experience" id="experience" style="padding: 120px 8%; background: var(--bg-primary);">
+        <h2 class="gsap-fade heading-gradient" style="text-align: center; margin-bottom: 50px;">Security Experience & Labs</h2>
+        
+        <div class="experience-container gsap-fade-up" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 60px;">
+            <div class="lab-card magnetic" style="background: #15151e; padding: 30px; border-radius: 16px; border: 1px solid var(--glass-border); box-shadow: 0 10px 30px rgba(0,0,0,0.5); transition: transform 0.3s, box-shadow 0.3s; cursor: pointer;" onmouseover="this.style.transform='translateY(-10px) scale(1.02)'; this.style.boxShadow='0 20px 40px rgba(0,255,200,0.2)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 10px 30px rgba(0,0,0,0.5)'">
+                <i class="fas fa-shield-alt" style="color: #2ed573; font-size: 2.5rem; margin-bottom: 20px;"></i>
+                <h3 style="color: white; margin-bottom: 15px; font-size: 1.5rem;">TryHackMe Profile</h3>
+                <p style="color: #a1a1aa; font-size: 0.95rem; margin-bottom: 15px;">Completed over 72 interactive security labs covering penetration testing, cryptography, and more.</p>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="color: #2ed573; font-weight: bold;">✔ Top 15%</div>
+                    <a href="https://tryhackme.com/p/shivamsingh0860" target="_blank" style="background: #2ed573; color: #15151e; padding: 8px 16px; border-radius: 4px; font-weight: bold; text-decoration: none; font-size: 0.85rem;">View Profile</a>
+                </div>
+            </div>
+
+            <div class="lab-card magnetic" style="background: #15151e; padding: 30px; border-radius: 16px; border: 1px solid var(--glass-border); box-shadow: 0 10px 30px rgba(0,0,0,0.5); transition: transform 0.3s, box-shadow 0.3s; cursor: pointer;" onmouseover="this.style.transform='translateY(-10px) scale(1.02)'; this.style.boxShadow='0 20px 40px rgba(159,239,0,0.2)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 10px 30px rgba(0,0,0,0.5)'">
+                <i class="fas fa-cube" style="color: #9fef00; font-size: 2.5rem; margin-bottom: 20px;"></i>
+                <h3 style="color: white; margin-bottom: 15px; font-size: 1.5rem;">HackTheBox</h3>
+                <p style="color: #a1a1aa; font-size: 0.95rem; margin-bottom: 15px;">Active participant in HTB machines, rooting Windows and Linux systems to sharpen exploitation skills.</p>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="color: #9fef00; font-weight: bold;">✔ Active</div>
+                    <a href="https://app.hackthebox.com/users/1988977?profile-top-tab=machines&ownership-period=1M&profile-bottom-tab=prolabs" target="_blank" style="background: #9fef00; color: #15151e; padding: 8px 16px; border-radius: 4px; font-weight: bold; text-decoration: none; font-size: 0.85rem;">View Profile</a>
+                </div>
+            </div>
+            
+            <div class="lab-card magnetic" style="background: #15151e; padding: 30px; border-radius: 16px; border: 1px solid var(--glass-border); box-shadow: 0 10px 30px rgba(0,0,0,0.5); transition: transform 0.3s, box-shadow 0.3s; cursor: pointer;" onmouseover="this.style.transform='translateY(-10px) scale(1.02)'; this.style.boxShadow='0 20px 40px rgba(0,255,200,0.2)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 10px 30px rgba(0,0,0,0.5)'">
+                <i class="fas fa-network-wired" style="color: #6366f1; font-size: 2.5rem; margin-bottom: 20px;"></i>
+                <h3 style="color: white; margin-bottom: 15px; font-size: 1.5rem;">Network Scanning</h3>
+                <p style="color: #a1a1aa; font-size: 0.95rem;">Extensive experience with Nmap for port scanning, OS detection, and vulnerability scanning.</p>
+            </div>
+
+            <div class="lab-card magnetic" style="background: #15151e; padding: 30px; border-radius: 16px; border: 1px solid var(--glass-border); box-shadow: 0 10px 30px rgba(0,0,0,0.5); transition: transform 0.3s, box-shadow 0.3s; cursor: pointer;" onmouseover="this.style.transform='translateY(-10px) scale(1.02)'; this.style.boxShadow='0 20px 40px rgba(0,255,200,0.2)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 10px 30px rgba(0,0,0,0.5)'">
+                <i class="fas fa-wave-square" style="color: #00ffcc; font-size: 2.5rem; margin-bottom: 20px;"></i>
+                <h3 style="color: white; margin-bottom: 15px; font-size: 1.5rem;">Packet Analysis</h3>
+                <p style="color: #a1a1aa; font-size: 0.95rem;">In-depth knowledge of Wireshark for deep packet inspection and network traffic analysis.</p>
+            </div>
+        </div>
+
+        <div style="background: #0f131f; padding: 40px; border-radius: 16px; border: 1px solid var(--glass-border); max-width: 600px; margin: 0 auto; box-shadow: 0 20px 50px rgba(0,0,0,0.5);" class="gsap-fade-up">
+            <div style="text-align: center; margin-bottom: 20px;">
+                <i class="fas fa-unlock-alt" id="pw-icon" style="font-size: 3rem; color: #ff5f56; transition: color 0.3s, text-shadow 0.3s;"></i>
+                <h3 style="color: white; font-size: 1.5rem; margin-top: 15px;">Live Password Strength Checker</h3>
+                <p style="color: #a1a1aa; font-size: 0.9rem;">Test your password against common cracking heuristics.</p>
+            </div>
+            
+            <input type="password" id="pw-input" placeholder="Enter a password to test..." style="width: 100%; padding: 15px; border-radius: 8px; border: 1px solid #334155; background: #1a1a24; color: white; font-family: monospace; font-size: 1.1rem; outline: none; transition: border-color 0.3s;">
+            
+            <div style="margin-top: 15px;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                    <span style="color: #a1a1aa; font-size: 0.9rem;">Strength</span>
+                    <span id="pw-text" style="color: #ff5f56; font-size: 0.9rem; font-weight: bold;">Weak</span>
+                </div>
+                <div style="width: 100%; height: 8px; background: #334155; border-radius: 4px; overflow: hidden;">
+                    <div id="pw-bar" style="width: 10%; height: 100%; background: #ff5f56; transition: width 0.3s, background 0.3s;"></div>
+                </div>
+            </div>
+        </div>
+        
+        <script>
+            const pwInput = document.getElementById('pw-input');
+            const pwBar = document.getElementById('pw-bar');
+            const pwText = document.getElementById('pw-text');
+            const pwIcon = document.getElementById('pw-icon');
+            
+            if(pwInput) {
+                pwInput.addEventListener('input', function() {
+                    let pw = this.value;
+                    let strength = 0;
+                    if(pw.length > 5) strength += 1;
+                    if(pw.length > 8) strength += 1;
+                    if(/[A-Z]/.test(pw)) strength += 1;
+                    if(/[0-9]/.test(pw)) strength += 1;
+                    if(/[^A-Za-z0-9]/.test(pw)) strength += 1;
+                    
+                    if(pw.length === 0) {
+                        pwBar.style.width = '0%';
+                        pwText.innerText = 'None';
+                        pwIcon.style.color = '#ff5f56';
+                        pwIcon.style.textShadow = 'none';
+                        pwIcon.className = 'fas fa-unlock-alt';
+                    } else if(strength < 2) {
+                        pwBar.style.width = '25%';
+                        pwBar.style.background = '#ff5f56';
+                        pwText.innerText = 'Weak';
+                        pwText.style.color = '#ff5f56';
+                        pwIcon.style.color = '#ff5f56';
+                        pwIcon.style.textShadow = '0 0 10px rgba(255, 95, 86, 0.5)';
+                        pwIcon.className = 'fas fa-unlock-alt';
+                    } else if(strength < 4) {
+                        pwBar.style.width = '50%';
+                        pwBar.style.background = '#facc15';
+                        pwText.innerText = 'Medium';
+                        pwText.style.color = '#facc15';
+                        pwIcon.style.color = '#facc15';
+                        pwIcon.style.textShadow = '0 0 10px rgba(250, 204, 21, 0.5)';
+                        pwIcon.className = 'fas fa-unlock-alt';
+                    } else {
+                        pwBar.style.width = '100%';
+                        pwBar.style.background = '#27c93f';
+                        pwText.innerText = 'Strong';
+                        pwText.style.color = '#27c93f';
+                        pwIcon.style.color = '#27c93f';
+                        pwIcon.style.textShadow = '0 0 20px rgba(39, 201, 63, 0.8)';
+                        pwIcon.className = 'fas fa-lock'; // Lock secures!
+                    }
+                });
+            }
+        </script>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section class="skills" id="skills" style="padding-top: 100px;">
+        <div style="text-align: center; margin-bottom: 50px;">
+            <h2 class="gsap-fade heading-gradient" style="margin-bottom: 10px; font-size: 3rem;">Technical <span style="color: #6366f1;">Skills</span></h2>
+            <p class="gsap-fade" style="color: #a1a1aa; font-size: 1.1rem;">My technical expertise and proficiency</p>
+        </div>
+
+        <!-- Security Skill Radar Chart -->
+        <div class="gsap-fade" style="max-width: 600px; margin: 0 auto 50px auto; background: #0c0c0c; border: 1px solid #334155; padding: 20px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+            <canvas id="skillRadar"></canvas>
+        </div>
+
+        <!-- Tabs -->
+        <div class="skills-tabs gsap-fade" style="display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; flex-wrap: wrap;">
+            <button class="skill-tab active" onclick="switchTab('programming')" style="background: rgba(99, 102, 241, 0.8); color: white; border: 1px solid #6366f1; padding: 10px 24px; border-radius: 30px; font-weight: 500; font-size: 0.95rem; cursor: pointer; transition: all 0.3s; box-shadow: 0 0 20px rgba(99, 102, 241, 0.4); font-family: 'Poppins', sans-serif;">Programming</button>
+            <button class="skill-tab" onclick="switchTab('tools')" style="background: transparent; color: #a1a1aa; border: 1px solid #334155; padding: 10px 24px; border-radius: 30px; font-weight: 500; font-size: 0.95rem; cursor: pointer; transition: all 0.3s; font-family: 'Poppins', sans-serif;" onmouseover="this.style.borderColor='#6366f1'; this.style.color='white'" onmouseout="if(!this.classList.contains('active')) { this.style.borderColor='#334155'; this.style.color='#a1a1aa'; }">Tools</button>
+            <button class="skill-tab" onclick="switchTab('webdev')" style="background: transparent; color: #a1a1aa; border: 1px solid #334155; padding: 10px 24px; border-radius: 30px; font-weight: 500; font-size: 0.95rem; cursor: pointer; transition: all 0.3s; font-family: 'Poppins', sans-serif;" onmouseover="this.style.borderColor='#6366f1'; this.style.color='white'" onmouseout="if(!this.classList.contains('active')) { this.style.borderColor='#334155'; this.style.color='#a1a1aa'; }">Web Dev</button>
+        </div>
+
+        <!-- Programming Container -->
+        <div id="tab-programming" class="skills-grid tab-content" style="display: grid; gap: 20px; max-width: 1000px; margin: 0 auto;">
+            <div class="skill-card" style="background: #15151e; padding: 30px 20px; border-radius: 12px; text-align: center; border: 1px solid #1f2937;">
+                <i class="fab fa-python" style="font-size: 3rem; color: #3776AB; margin-bottom: 20px;"></i>
+                <h3 style="color: white; font-size: 1.2rem; margin-bottom: 25px;">Python</h3>
+                <span style="color: #a855f7; font-weight: 600; font-size: 0.95rem;">Expert</span>
+            </div>
+            <div class="skill-card" style="background: #15151e; padding: 30px 20px; border-radius: 12px; text-align: center; border: 1px solid #1f2937;">
+                <i class="fas fa-bolt" style="font-size: 3rem; color: #d97757; margin-bottom: 20px;"></i>
+                <h3 style="color: white; font-size: 1.2rem; margin-bottom: 25px;">C/C++</h3>
+                <span style="color: #a855f7; font-weight: 600; font-size: 0.95rem;">Expert</span>
+            </div>
+
+            <div class="skill-card" style="background: #15151e; padding: 30px 20px; border-radius: 12px; text-align: center; border: 1px solid #1f2937;">
+                <i class="fab fa-js" style="font-size: 3rem; color: #f7df1e; margin-bottom: 20px;"></i>
+                <h3 style="color: white; font-size: 1.2rem; margin-bottom: 25px;">JavaScript</h3>
+                <span style="color: #a855f7; font-weight: 600; font-size: 0.95rem;">Advanced</span>
+            </div>
+        </div>
+
+        <!-- Tools Container -->
+        <div id="tab-tools" class="skills-grid tab-content" style="display: none; gap: 20px; max-width: 1000px; margin: 0 auto;">
+            <div class="skill-card" style="background: #15151e; padding: 30px 20px; border-radius: 16px; text-align: center; border: 1px solid #1f2937; position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center;" onmouseover="this.querySelector('.tool-bg').style.opacity='0.15'; this.querySelector('i').style.transform='scale(1.15)';" onmouseout="this.querySelector('.tool-bg').style.opacity='0'; this.querySelector('i').style.transform='scale(1)';">
+                <div class="tool-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at top, #38bdf8, transparent 70%); opacity: 0; transition: opacity 0.4s;"></div>
+                <div style="background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.3); width: 70px; height: 70px; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; z-index: 1;">
+                    <i class="fas fa-network-wired" style="font-size: 2rem; color: #38bdf8; transition: transform 0.3s;"></i>
+                </div>
+                <h3 style="color: white; font-size: 1.15rem; margin: 0; z-index: 1; font-weight: 600;">Nmap</h3>
+            </div>
+            
+            <div class="skill-card" style="background: #15151e; padding: 30px 20px; border-radius: 16px; text-align: center; border: 1px solid #1f2937; position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center;" onmouseover="this.querySelector('.tool-bg').style.opacity='0.15'; this.querySelector('i').style.transform='scale(1.15)';" onmouseout="this.querySelector('.tool-bg').style.opacity='0'; this.querySelector('i').style.transform='scale(1)';">
+                <div class="tool-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at top, #60a5fa, transparent 70%); opacity: 0; transition: opacity 0.4s;"></div>
+                <div style="background: rgba(96, 165, 250, 0.1); border: 1px solid rgba(96, 165, 250, 0.3); width: 70px; height: 70px; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; z-index: 1;">
+                    <i class="fas fa-wave-square" style="font-size: 2rem; color: #60a5fa; transition: transform 0.3s;"></i>
+                </div>
+                <h3 style="color: white; font-size: 1.15rem; margin: 0; z-index: 1; font-weight: 600;">Wireshark</h3>
+            </div>
+
+            <div class="skill-card" style="background: #15151e; padding: 30px 20px; border-radius: 16px; text-align: center; border: 1px solid #1f2937; position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center;" onmouseover="this.querySelector('.tool-bg').style.opacity='0.15'; this.querySelector('i').style.transform='scale(1.15)';" onmouseout="this.querySelector('.tool-bg').style.opacity='0'; this.querySelector('i').style.transform='scale(1)';">
+                <div class="tool-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at top, #fb923c, transparent 70%); opacity: 0; transition: opacity 0.4s;"></div>
+                <div style="background: rgba(251, 146, 60, 0.1); border: 1px solid rgba(251, 146, 60, 0.3); width: 70px; height: 70px; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; z-index: 1;">
+                    <i class="fas fa-shield-alt" style="font-size: 2rem; color: #fb923c; transition: transform 0.3s;"></i>
+                </div>
+                <h3 style="color: white; font-size: 1.15rem; margin: 0; z-index: 1; font-weight: 600;">Burp Suite</h3>
+            </div>
+
+            <div class="skill-card" style="background: #15151e; padding: 30px 20px; border-radius: 16px; text-align: center; border: 1px solid #1f2937; position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center;" onmouseover="this.querySelector('.tool-bg').style.opacity='0.15'; this.querySelector('i').style.transform='scale(1.15)';" onmouseout="this.querySelector('.tool-bg').style.opacity='0'; this.querySelector('i').style.transform='scale(1)';">
+                <div class="tool-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at top, #a78bfa, transparent 70%); opacity: 0; transition: opacity 0.4s;"></div>
+                <div style="background: rgba(167, 139, 250, 0.1); border: 1px solid rgba(167, 139, 250, 0.3); width: 70px; height: 70px; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; z-index: 1;">
+                    <i class="fas fa-skull-crossbones" style="font-size: 2rem; color: #a78bfa; transition: transform 0.3s;"></i>
+                </div>
+                <h3 style="color: white; font-size: 1.15rem; margin: 0; z-index: 1; font-weight: 600;">Hydra</h3>
+            </div>
+
+            <div class="skill-card" style="background: #15151e; padding: 30px 20px; border-radius: 16px; text-align: center; border: 1px solid #1f2937; position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center;" onmouseover="this.querySelector('.tool-bg').style.opacity='0.15'; this.querySelector('i').style.transform='scale(1.15)';" onmouseout="this.querySelector('.tool-bg').style.opacity='0'; this.querySelector('i').style.transform='scale(1)';">
+                <div class="tool-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at top, #9ca3af, transparent 70%); opacity: 0; transition: opacity 0.4s;"></div>
+                <div style="background: rgba(156, 163, 175, 0.1); border: 1px solid rgba(156, 163, 175, 0.3); width: 70px; height: 70px; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; z-index: 1;">
+                    <i class="fas fa-user-secret" style="font-size: 2rem; color: #9ca3af; transition: transform 0.3s;"></i>
+                </div>
+                <h3 style="color: white; font-size: 1.15rem; margin: 0; z-index: 1; font-weight: 600;">John the Ripper</h3>
+            </div>
+
+            <div class="skill-card" style="background: #15151e; padding: 30px 20px; border-radius: 16px; text-align: center; border: 1px solid #1f2937; position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center;" onmouseover="this.querySelector('.tool-bg').style.opacity='0.15'; this.querySelector('i').style.transform='scale(1.15)';" onmouseout="this.querySelector('.tool-bg').style.opacity='0'; this.querySelector('i').style.transform='scale(1)';">
+                <div class="tool-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at top, #4ade80, transparent 70%); opacity: 0; transition: opacity 0.4s;"></div>
+                <div style="background: rgba(74, 222, 128, 0.1); border: 1px solid rgba(74, 222, 128, 0.3); width: 70px; height: 70px; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; z-index: 1;">
+                    <i class="fas fa-bug" style="font-size: 2rem; color: #4ade80; transition: transform 0.3s;"></i>
+                </div>
+                <h3 style="color: white; font-size: 1.15rem; margin: 0; z-index: 1; font-weight: 600;">Nessus</h3>
+            </div>
+
+            <div class="skill-card" style="background: #15151e; padding: 30px 20px; border-radius: 16px; text-align: center; border: 1px solid #1f2937; position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center;" onmouseover="this.querySelector('.tool-bg').style.opacity='0.15'; this.querySelector('i').style.transform='scale(1.15)';" onmouseout="this.querySelector('.tool-bg').style.opacity='0'; this.querySelector('i').style.transform='scale(1)';">
+                <div class="tool-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at top, #f472b6, transparent 70%); opacity: 0; transition: opacity 0.4s;"></div>
+                <div style="background: rgba(244, 114, 182, 0.1); border: 1px solid rgba(244, 114, 182, 0.3); width: 70px; height: 70px; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; z-index: 1;">
+                    <i class="fas fa-globe" style="font-size: 2rem; color: #f472b6; transition: transform 0.3s;"></i>
+                </div>
+                <h3 style="color: white; font-size: 1.15rem; margin: 0; z-index: 1; font-weight: 600;">Nikto</h3>
+            </div>
+
+            <div class="skill-card" style="background: #15151e; padding: 30px 20px; border-radius: 16px; text-align: center; border: 1px solid #1f2937; position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center;" onmouseover="this.querySelector('.tool-bg').style.opacity='0.15'; this.querySelector('i').style.transform='scale(1.15)';" onmouseout="this.querySelector('.tool-bg').style.opacity='0'; this.querySelector('i').style.transform='scale(1)';">
+                <div class="tool-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at top, #2dd4bf, transparent 70%); opacity: 0; transition: opacity 0.4s;"></div>
+                <div style="background: rgba(45, 212, 191, 0.1); border: 1px solid rgba(45, 212, 191, 0.3); width: 70px; height: 70px; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; z-index: 1;">
+                    <i class="fas fa-spider" style="font-size: 2rem; color: #2dd4bf; transition: transform 0.3s;"></i>
+                </div>
+                <h3 style="color: white; font-size: 1.15rem; margin: 0; z-index: 1; font-weight: 600;">Metasploit</h3>
+            </div>
+        </div>
+
+        <!-- Web Dev Container -->
+        <div id="tab-webdev" class="skills-grid tab-content" style="display: none; gap: 20px; max-width: 1000px; margin: 0 auto;">
+            <div class="skill-card" style="background: #15151e; padding: 30px 20px; border-radius: 12px; text-align: center; border: 1px solid #1f2937;">
+                <i class="fab fa-html5" style="font-size: 3rem; color: #e34f26; margin-bottom: 20px;"></i>
+                <h3 style="color: white; font-size: 1.2rem; margin-bottom: 25px;">HTML</h3>
+                <span style="color: #a855f7; font-weight: 600; font-size: 0.95rem;">Expert</span>
+            </div>
+            <div class="skill-card" style="background: #15151e; padding: 30px 20px; border-radius: 12px; text-align: center; border: 1px solid #1f2937;">
+                <i class="fab fa-css3-alt" style="font-size: 3rem; color: #1572b6; margin-bottom: 20px;"></i>
+                <h3 style="color: white; font-size: 1.2rem; margin-bottom: 25px;">CSS</h3>
+                <span style="color: #a855f7; font-weight: 600; font-size: 0.95rem;">Advanced</span>
+            </div>
+            <div class="skill-card" style="background: #15151e; padding: 30px 20px; border-radius: 12px; text-align: center; border: 1px solid #1f2937;">
+                <i class="fab fa-js" style="font-size: 3rem; color: #f7df1e; margin-bottom: 20px;"></i>
+                <h3 style="color: white; font-size: 1.2rem; margin-bottom: 25px;">JavaScript</h3>
+                <span style="color: #a855f7; font-weight: 600; font-size: 0.95rem;">Advanced</span>
+            </div>
+            <div class="skill-card" style="background: #15151e; padding: 30px 20px; border-radius: 12px; text-align: center; border: 1px solid #1f2937;">
+                <i class="fab fa-react" style="font-size: 3rem; color: #61dafb; margin-bottom: 20px;"></i>
+                <h3 style="color: white; font-size: 1.2rem; margin-bottom: 25px;">React</h3>
+                <span style="color: #a855f7; font-weight: 600; font-size: 0.95rem;">Intermediate</span>
+            </div>
+        </div>
+
+        <script>
+            function switchTab(tabId) {
+                // Update active tab styling
+                const tabs = document.querySelectorAll('.skill-tab');
+                tabs.forEach(tab => {
+                    tab.classList.remove('active');
+                    tab.style.background = 'transparent';
+                    tab.style.color = '#a1a1aa';
+                    tab.style.borderColor = '#334155';
+                    tab.style.boxShadow = 'none';
+                });
+                const activeTab = event.currentTarget;
+                activeTab.classList.add('active');
+                activeTab.style.background = 'rgba(99, 102, 241, 0.8)';
+                activeTab.style.color = 'white';
+                activeTab.style.borderColor = '#6366f1';
+                activeTab.style.boxShadow = '0 0 20px rgba(99, 102, 241, 0.4)';
+
+                // Update content visibility
+                const contents = document.querySelectorAll('.tab-content');
+                contents.forEach(content => {
+                    content.style.display = 'none';
+                });
+                const activeContent = document.getElementById('tab-' + tabId);
+                if(activeContent) {
+                    activeContent.style.display = 'grid';
+                    
+                    // Re-trigger simple pop-in animation for cards
+                    const cards = activeContent.querySelectorAll('.skill-card');
+                    cards.forEach((card, i) => {
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            card.style.transition = 'all 0.4s ease';
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, i * 50);
+                    });
+                }
+            }
+        </script>
+    </section>
+
+
+
+    <!-- PROJECTS SECTION -->
+    <section class="projects" id="projects">
+        <h2 class="gsap-fade heading-gradient">Featured Projects</h2>
+        <div class="project-grid" id="project-container" style="gap: 40px; justify-content: center;">
+            <!-- Project 1 -->
+            <div class="project-card gsap-fade-up" style="text-align: left; width: 100%;">
+                <div class="project-img-wrapper" style="position: relative; height: 260px; overflow: hidden; border-radius: 12px 12px 0 0;">
+                    <img loading="lazy" src="./assets/project1.png" alt="project" style="width: 100%; height: 100%; object-fit: cover;">
+                    <div style="position: absolute; inset: 0; background: rgba(0, 0, 0, 0.4); display: flex; align-items: center; justify-content: center; gap: 15px; opacity: 0; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0'">
+                        <a href="https://github.com/shivam86200/Real-Time-Memory-Allocation-Trackers" target="_blank" style="background: #6366f1; color: white; padding: 12px 28px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 1.1rem; transition: background 0.3s; box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);"><i class="fab fa-github"></i> GitHub</a>
+                        <a href="#" target="_blank" style="background: #10b981; color: white; padding: 12px 28px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 1.1rem; transition: background 0.3s; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                    </div>
+                </div>
+                <div class="project-info" style="padding: 30px; background: #0a0a0c; border-radius: 0 0 12px 12px;">
+                    <h3 style="font-size: 2rem; margin-bottom: 20px; color: #ffffff; line-height: 1.2;">Real Time Memory<br>Allocation Tracker</h3>
+                    <p style="color: #a1a1aa; font-size: 1.05rem; line-height: 1.6; margin-bottom: 20px;">A real-time memory allocation tracker visualizing paging and segmentation, enabling dynamic monitoring, efficient debugging, and deeper understanding of operating system memory management.</p>
+                    
+                    <div style="background: #13131a; border-left: 4px solid #6366f1; padding: 20px; border-radius: 4px; margin-bottom: 20px;">
+                        <p style="color: #ffffff; font-size: 0.95rem; margin-bottom: 10px;"><strong><i class="fas fa-exclamation-circle" style="color: #ef4444; margin-right: 8px;"></i>Problem:</strong> OS memory allocation concepts are hard to visualize and understand.</p>
+                        <p style="color: #ffffff; font-size: 0.95rem; margin-bottom: 10px;"><strong><i class="fas fa-lightbulb" style="color: #facc15; margin-right: 8px;"></i>Solution:</strong> Built an interactive real-time simulator for paging and segmentation.</p>
+                        <p style="color: #ffffff; font-size: 0.95rem; margin: 0;"><strong><i class="fas fa-chart-line" style="color: #22c55e; margin-right: 8px;"></i>Impact:</strong> Helps students understand OS concepts clearly and debug efficiently.</p>
+                    </div>
+
+                    <div style="background: #13131a; border-left: 4px solid #6366f1; padding: 20px; border-radius: 4px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
+                        <i class="fas fa-layer-group" style="font-size: 1.2rem; color: #6366f1; margin-right: 5px;"></i>
+                        <span style="background: #6366f1; color: white; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600;"><i class="fas fa-memory"></i> Memory</span>
+                        <span style="background: #6366f1; color: white; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600;"><i class="fas fa-file-alt"></i> Paging</span>
+                        <span style="background: #6366f1; color: white; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600;"><i class="fas fa-columns"></i> Segments</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project-card gsap-fade-up" style="text-align: left; width: 100%;">
+                <div class="project-img-wrapper" style="position: relative; height: 260px; overflow: hidden; border-radius: 12px 12px 0 0;">
+                    <img loading="lazy" src="./assets/project2.png" alt="project" style="width: 100%; height: 100%; object-fit: cover;">
+                    <div style="position: absolute; inset: 0; background: rgba(0, 0, 0, 0.4); display: flex; align-items: center; justify-content: center; gap: 15px; opacity: 0; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0'">
+                        <a href="https://github.com/shivam86200/Electric-Grid-Failure-Prediction" target="_blank" style="background: #ec4899; color: white; padding: 12px 28px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 1.1rem; transition: background 0.3s; box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4);"><i class="fab fa-github"></i> GitHub</a>
+                        <a href="#" target="_blank" style="background: #10b981; color: white; padding: 12px 28px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 1.1rem; transition: background 0.3s; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                    </div>
+                </div>
+                <div class="project-info" style="padding: 30px; background: #0a0a0c; border-radius: 0 0 12px 12px;">
+                    <h3 style="font-size: 2rem; margin-bottom: 20px; color: #ffffff; line-height: 1.2;">Electric Grid Failure<br>Prediction</h3>
+                    <p style="color: #a1a1aa; font-size: 1.05rem; line-height: 1.6; margin-bottom: 20px;">An advanced predictive analytics model designed to forecast power grid failures using historical data, enabling proactive infrastructure maintenance and minimizing downtime.</p>
+                    
+                    <div style="background: #13131a; border-left: 4px solid #ec4899; padding: 20px; border-radius: 4px; margin-bottom: 20px;">
+                        <p style="color: #ffffff; font-size: 0.95rem; margin-bottom: 10px;"><strong><i class="fas fa-exclamation-circle" style="color: #ef4444; margin-right: 8px;"></i>Problem:</strong> Grid failures occur unexpectedly and cause massive disruptions.</p>
+                        <p style="color: #ffffff; font-size: 0.95rem; margin-bottom: 10px;"><strong><i class="fas fa-lightbulb" style="color: #facc15; margin-right: 8px;"></i>Solution:</strong> Developed machine learning models to identify grid instability patterns.</p>
+                        <p style="color: #ffffff; font-size: 0.95rem; margin: 0;"><strong><i class="fas fa-chart-line" style="color: #22c55e; margin-right: 8px;"></i>Impact:</strong> Prevents blackout events by forecasting anomalies ahead of time.</p>
+                    </div>
+
+                    <div style="background: #13131a; border-left: 4px solid #ec4899; padding: 20px; border-radius: 4px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
+                        <i class="fas fa-code-branch" style="font-size: 1.2rem; color: #ec4899; margin-right: 5px;"></i>
+                        <span style="background: #ec4899; color: white; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600;"><i class="fas fa-robot"></i> ML</span>
+                        <span style="background: #ec4899; color: white; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600;"><i class="fas fa-chart-bar"></i> Analytics</span>
+                        <span style="background: #ec4899; color: white; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600;"><i class="fab fa-python"></i> Python</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="project-card gsap-fade-up" style="text-align: left; width: 100%;">
+                <div class="project-img-wrapper" style="position: relative; height: 260px; overflow: hidden; border-radius: 12px 12px 0 0;">
+                    <img loading="lazy" src="./assets/project3.png" alt="project" style="width: 100%; height: 100%; object-fit: cover;">
+                    <div style="position: absolute; inset: 0; background: rgba(0, 0, 0, 0.4); display: flex; align-items: center; justify-content: center; gap: 15px; opacity: 0; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0'">
+                        <a href="https://github.com/shivam86200/Grocery-List-Generator" target="_blank" style="background: #10b981; color: white; padding: 12px 28px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 1.1rem; transition: background 0.3s; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);"><i class="fab fa-github"></i> GitHub</a>
+                        <a href="#" target="_blank" style="background: #6366f1; color: white; padding: 12px 28px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 1.1rem; transition: background 0.3s; box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                    </div>
+                </div>
+                <div class="project-info" style="padding: 30px; background: #0a0a0c; border-radius: 0 0 12px 12px;">
+                    <h3 style="font-size: 2rem; margin-bottom: 20px; color: #ffffff; line-height: 1.2;">Grocery List<br>Generator</h3>
+                    <p style="color: #a1a1aa; font-size: 1.05rem; line-height: 1.6; margin-bottom: 20px;">A sleek, dynamic application to quickly outline, organize, and manage your grocery shopping in real-time. Built for an optimal and user-friendly experience.</p>
+                    
+                    <div style="background: #13131a; border-left: 4px solid #10b981; padding: 20px; border-radius: 4px; margin-bottom: 20px;">
+                        <p style="color: #ffffff; font-size: 0.95rem; margin-bottom: 10px;"><strong><i class="fas fa-exclamation-circle" style="color: #ef4444; margin-right: 8px;"></i>Problem:</strong> Managing manual grocery lists leads to forgotten items and chaos.</p>
+                        <p style="color: #ffffff; font-size: 0.95rem; margin-bottom: 10px;"><strong><i class="fas fa-lightbulb" style="color: #facc15; margin-right: 8px;"></i>Solution:</strong> Designed a fully responsive UI to digitally record and track items.</p>
+                        <p style="color: #ffffff; font-size: 0.95rem; margin: 0;"><strong><i class="fas fa-chart-line" style="color: #22c55e; margin-right: 8px;"></i>Impact:</strong> Simplifies shopping experience drastically for typical users.</p>
+                    </div>
+
+                    <div style="background: #13131a; border-left: 4px solid #10b981; padding: 20px; border-radius: 4px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
+                        <i class="fas fa-tools" style="font-size: 1.2rem; color: #10b981; margin-right: 5px;"></i>
+                        <span style="background: #10b981; color: white; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600;"><i class="fab fa-js"></i> JavaScript</span>
+                        <span style="background: #10b981; color: white; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600;"><i class="fas fa-code"></i> DOM</span>
+                        <span style="background: #10b981; color: white; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600;"><i class="fas fa-paint-brush"></i> UX/UI</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHAT I CAN HELP WITH SECTION -->
+    <section class="services" id="services" style="padding: 120px 8%; background: var(--bg-secondary); border-top: 1px solid var(--glass-border);">
+        <h2 class="gsap-fade heading-gradient" style="text-align: center; margin-bottom: 50px; font-size: 3rem;">What I Can Help With</h2>
+        <div class="services-grid" style="gap: 2rem; max-width: 1200px; margin: 0 auto;">
+            
+            <div class="service-block gsap-fade-up" style="background: #15151e; padding: 40px 30px; border-radius: 12px; transition: transform 0.3s;">
+                <div style="font-size: 3rem; text-align: center; margin-bottom: 20px;">🛡️</div>
+                <h3 style="text-align: center; margin-bottom: 15px; font-size: 1.5rem;">Cybersecurity</h3>
+                <p style="text-align: center; color: #a1a1aa; font-size: 0.95rem; margin-bottom: 30px;">Securing systems and analyzing attack patterns ensuring data safety and integrity.</p>
+                <div style="display: flex; flex-direction: column; gap: 15px;">
+                    <div style="display: flex; align-items: center; gap: 10px; color: #d4d4d8; font-size: 0.9rem;"><i class="fas fa-check" style="color: #6366f1;"></i> Network Security</div>
+                    <div style="display: flex; align-items: center; gap: 10px; color: #d4d4d8; font-size: 0.9rem;"><i class="fas fa-check" style="color: #6366f1;"></i> Penetration Testing</div>
+                    <div style="display: flex; align-items: center; gap: 10px; color: #d4d4d8; font-size: 0.9rem;"><i class="fas fa-check" style="color: #6366f1;"></i> Vulnerability Assessment</div>
+                    <div style="display: flex; align-items: center; gap: 10px; color: #d4d4d8; font-size: 0.9rem;"><i class="fas fa-check" style="color: #6366f1;"></i> Threat Intelligence</div>
+                </div>
+            </div>
+
+            <div class="service-block gsap-fade-up" style="background: #15151e; padding: 40px 30px; border-radius: 12px; transition: transform 0.3s; transition-delay: 0.1s;">
+                <div style="font-size: 3rem; text-align: center; margin-bottom: 20px;">💻</div>
+                <h3 style="text-align: center; margin-bottom: 15px; font-size: 1.5rem;">C++</h3>
+                <p style="text-align: center; color: #a1a1aa; font-size: 0.95rem; margin-bottom: 30px;">Developing high-performance, system-level software and efficient applications.</p>
+                <div style="display: flex; flex-direction: column; gap: 15px;">
+                    <div style="display: flex; align-items: center; gap: 10px; color: #d4d4d8; font-size: 0.9rem;"><i class="fas fa-check" style="color: #6366f1;"></i> System Programming</div>
+                    <div style="display: flex; align-items: center; gap: 10px; color: #d4d4d8; font-size: 0.9rem;"><i class="fas fa-check" style="color: #6366f1;"></i> Memory Management</div>
+                    <div style="display: flex; align-items: center; gap: 10px; color: #d4d4d8; font-size: 0.9rem;"><i class="fas fa-check" style="color: #6366f1;"></i> Object-Oriented Design</div>
+                    <div style="display: flex; align-items: center; gap: 10px; color: #d4d4d8; font-size: 0.9rem;"><i class="fas fa-check" style="color: #6366f1;"></i> Performance Optimization</div>
+                </div>
+            </div>
+
+            <div class="service-block gsap-fade-up" style="background: #15151e; padding: 40px 30px; border-radius: 12px; transition: transform 0.3s; transition-delay: 0.2s;">
+                <div style="font-size: 3rem; text-align: center; margin-bottom: 20px;">📊</div>
+                <h3 style="text-align: center; margin-bottom: 15px; font-size: 1.5rem;">Data Structure & Algorithm</h3>
+                <p style="text-align: center; color: #a1a1aa; font-size: 0.95rem; margin-bottom: 30px;">Solving complex computational problems with optimized algorithmic logic.</p>
+                <div style="display: flex; flex-direction: column; gap: 15px;">
+                    <div style="display: flex; align-items: center; gap: 10px; color: #d4d4d8; font-size: 0.9rem;"><i class="fas fa-check" style="color: #6366f1;"></i> Algorithm Design</div>
+                    <div style="display: flex; align-items: center; gap: 10px; color: #d4d4d8; font-size: 0.9rem;"><i class="fas fa-check" style="color: #6366f1;"></i> Complexity Analysis</div>
+                    <div style="display: flex; align-items: center; gap: 10px; color: #d4d4d8; font-size: 0.9rem;"><i class="fas fa-check" style="color: #6366f1;"></i> Advanced Data Structures</div>
+                    <div style="display: flex; align-items: center; gap: 10px; color: #d4d4d8; font-size: 0.9rem;"><i class="fas fa-check" style="color: #6366f1;"></i> Problem Solving</div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- CONTACT SECTION -->
+    <section class="contact" id="contact" style="padding: 100px 8%; background: var(--bg-primary);">
+        <h2 class="gsap-fade heading-gradient" style="text-align: center; margin-bottom: 50px; font-size: 3rem;">Get In Touch</h2>
+        
+        <div class="contact-container gsap-fade-up" style="gap: 30px; max-width: 1100px; margin: 0 auto;">
+            
+            <!-- Left Info Side -->
+            <div style="background: #15151e; padding: 40px; border-radius: 12px; border-left: 2px solid #6366f1; display: flex; flex-direction: column; gap: 20px;">
+                
+                <div style="background: #0a0a0c; padding: 20px; border-radius: 8px; display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
+                    <i class="fas fa-envelope-open-text" style="color: #6366f1; font-size: 1.2rem;"></i>
+                    <h4 style="margin: 0; font-size: 1.2rem; color: #ffffff;">Email</h4>
+                    <span style="color: #a1a1aa; font-size: 0.9rem; margin-left: auto; word-break: break-all;">shivamfulwariya124@gmail.com</span>
+                </div>
+
+                <div style="background: #0a0a0c; padding: 20px; border-radius: 8px; display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
+                    <i class="fas fa-mobile-alt" style="color: #6366f1; font-size: 1.2rem;"></i>
+                    <h4 style="margin: 0; font-size: 1.2rem; color: #ffffff;">Phone</h4>
+                    <span style="color: #a1a1aa; font-size: 0.9rem; margin-left: auto; word-break: break-all;">+91 9006861697</span>
+                </div>
+
+                <div style="background: #0a0a0c; padding: 20px; border-radius: 8px; display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
+                    <i class="fas fa-map-marker-alt" style="color: #ff4757; font-size: 1.2rem;"></i>
+                    <h4 style="margin: 0; font-size: 1.2rem; color: #ffffff;">Location</h4>
+                    <span style="color: #a1a1aa; font-size: 0.9rem; margin-left: auto; word-break: break-all;">Bihar, Chhapra</span>
+                </div>
+
+                <div style="display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap;">
+                    <a href="https://github.com/shivam86200" target="_blank" style="background: #6366f1; color: white; padding: 8px 20px; border-radius: 4px; text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: opacity 0.3s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">GitHub</a>
+                    <a href="https://www.linkedin.com/in/shivamsingh86/" target="_blank" style="background: #6366f1; color: white; padding: 8px 20px; border-radius: 4px; text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: opacity 0.3s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">LinkedIn</a>
+                    <a href="https://leetcode.com/u/shivam133/" target="_blank" style="background: #6366f1; color: white; padding: 8px 20px; border-radius: 4px; text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: opacity 0.3s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">LeetCode</a>
+                </div>
+            </div>
+
+            <!-- Right Form Side -->
+            <form class="glass-form" style="background: #15151e; padding: 40px; border-radius: 12px; display: flex; flex-direction: column; gap: 20px; margin: 0; max-width: 100%; box-shadow: none;">
+                
+                <input type="text" placeholder="Your Name" required style="width: 100%; padding: 15px; background: #0a0a0c; border: 1px solid #2a2a35; border-radius: 6px; color: white; font-family: 'Poppins', sans-serif;">
+                
+                <input type="email" placeholder="Your Email" required style="width: 100%; padding: 15px; background: #0a0a0c; border: 1px solid #2a2a35; border-radius: 6px; color: white; font-family: 'Poppins', sans-serif;">
+                
+                <div style="display: flex; align-items: center; gap: 10px; padding-left: 5px;">
+                    <input type="checkbox" id="verify" checked style="accent-color: #2ed573; width: 16px; height: 16px;">
+                    <label for="verify" style="color: #a1a1aa; font-size: 0.85rem; margin: 0;">You'll receive a verification code to confirm your email</label>
+                </div>
+                
+                <input type="text" placeholder="Subject" required style="width: 100%; padding: 15px; background: #0a0a0c; border: 1px solid #2a2a35; border-radius: 6px; color: white; font-family: 'Poppins', sans-serif;">
+
+                <textarea placeholder="Your Message" rows="5" required style="width: 100%; padding: 15px; background: #0a0a0c; border: 1px solid #2a2a35; border-radius: 6px; color: white; font-family: 'Poppins', sans-serif; resize: vertical;"></textarea>
+
+                <button type="submit" style="width: 100%; background: #6366f1; color: white; padding: 16px; border: none; border-radius: 6px; font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: background 0.3s; margin-top: 10px; font-family: 'Poppins', sans-serif;" onmouseover="this.style.background='#4f46e5'" onmouseout="this.style.background='#6366f1'">VERIFY EMAIL & SEND MESSAGE</button>
+            </form>
+        </div>
+    </section>
+    <footer style="background: #0f131f; padding: 80px 8% 30px; border-top: 1px solid #1f2937;">
+        <div class="footer-grid" style="display: grid; gap: 40px; max-width: 1200px; margin: 0 auto; margin-bottom: 60px;">
+            
+            <!-- Brand & Info -->
+            <div>
+                <h2 style="font-size: 2.5rem; font-weight: 700; color: #ffffff; margin-bottom: 20px;">Shivam<span style="color: #ff5da2;">.</span></h2>
+                <p style="color: #9ca3af; font-size: 0.95rem; line-height: 1.6; margin-bottom: 30px; max-width: 300px;">
+                    Transforming data into meaningful insights. Empowering smarter decisions with analytics. Building tomorrow's solutions today.
+                </p>
+                <!-- Social Icons Cluster -->
+                <div style="position: relative; width: 150px; height: 150px; margin: 0 auto;">
+                    <!-- Center Glow -->
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 30px; height: 30px; background: rgba(155, 92, 255, 0.5); border-radius: 50%; box-shadow: 0 0 30px 15px rgba(155, 92, 255, 0.4);"></div>
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 20px; height: 20px; background: #e0e7ff; border-radius: 50%;"></div>
+                    
+                    <!-- Icons -->
+                    <div class="social-icons-wrapper">
+                        <a href="https://www.linkedin.com/in/shivamsingh86/" target="_blank" style="position: absolute; top: 10px; left: 10px; width: 45px; height: 45px; background: rgba(30, 41, 59, 0.8); border: 1px solid #334155; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; transition: background 0.3s;" onmouseover="this.style.background='#334155'" onmouseout="this.style.background='rgba(30, 41, 59, 0.8)'"><i class="fab fa-linkedin-in"></i></a>
+                        
+                        <a href="https://leetcode.com/u/shivam133/" target="_blank" style="position: absolute; top: 10px; right: 10px; width: 45px; height: 45px; background: rgba(30, 41, 59, 0.8); border: 1px solid #334155; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; transition: background 0.3s;" onmouseover="this.style.background='#334155'" onmouseout="this.style.background='rgba(30, 41, 59, 0.8)'"><i class="fas fa-code"></i></a>
+                        
+                        <a href="https://github.com/shivam86200" target="_blank" style="position: absolute; bottom: 10px; left: 10px; width: 45px; height: 45px; background: rgba(30, 41, 59, 0.8); border: 1px solid #334155; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; transition: background 0.3s;" onmouseover="this.style.background='#334155'" onmouseout="this.style.background='rgba(30, 41, 59, 0.8)'"><i class="fab fa-github"></i></a>
+                        
+                        <a href="mailto:shivamfulwariya124@gmail.com" style="position: absolute; bottom: 10px; right: 10px; width: 45px; height: 45px; background: rgba(30, 41, 59, 0.8); border: 1px solid #334155; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; transition: background 0.3s;" onmouseover="this.style.background='#334155'" onmouseout="this.style.background='rgba(30, 41, 59, 0.8)'"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div style="display: flex; flex-direction: column;">
+                <h3 style="color: white; font-size: 1.2rem; margin-bottom: 25px; position: relative;">Quick Links
+                    <span style="position: absolute; bottom: -8px; left: 0; width: 40px; height: 3px; background: linear-gradient(90deg, #ff5da2, #ff8c42); border-radius: 2px;"></span>
+                </h3>
+                <div style="display: flex; flex-direction: column; gap: 15px;">
+                    <a href="#home" style="color: #9ca3af; text-decoration: none; font-size: 0.95rem; transition: color 0.3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#9ca3af'">Home</a>
+                    <a href="#about" style="color: #9ca3af; text-decoration: none; font-size: 0.95rem; transition: color 0.3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#9ca3af'">About</a>
+                    <a href="#skills" style="color: #9ca3af; text-decoration: none; font-size: 0.95rem; transition: color 0.3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#9ca3af'">Skills</a>
+                    <a href="#projects" style="color: #9ca3af; text-decoration: none; font-size: 0.95rem; transition: color 0.3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#9ca3af'">Projects</a>
+                    <a href="#services" style="color: #9ca3af; text-decoration: none; font-size: 0.95rem; transition: color 0.3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#9ca3af'">Services</a>
+                    <a href="#contact" style="color: #9ca3af; text-decoration: none; font-size: 0.95rem; transition: color 0.3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#9ca3af'">Contact</a>
+                </div>
+            </div>
+
+            <!-- Services -->
+            <div style="display: flex; flex-direction: column;">
+                <h3 style="color: white; font-size: 1.2rem; margin-bottom: 25px; position: relative;">Services
+                    <span style="position: absolute; bottom: -8px; left: 0; width: 40px; height: 3px; background: linear-gradient(90deg, #ff5da2, #ff8c42); border-radius: 2px;"></span>
+                </h3>
+                <div style="display: flex; flex-direction: column; gap: 15px;">
+                    <span style="color: #9ca3af; font-size: 0.95rem;">Cybersecurity</span>
+                    <span style="color: #9ca3af; font-size: 0.95rem;">C++</span>
+                    <span style="color: #9ca3af; font-size: 0.95rem;">Data Structure & Algorithm</span>
+                    <span style="color: #9ca3af; font-size: 0.95rem;">Web Development</span>
+                </div>
+            </div>
+
+            <!-- Get In Touch -->
+            <div style="display: flex; flex-direction: column;">
+                <h3 style="color: white; font-size: 1.2rem; margin-bottom: 25px; position: relative;">Get In Touch
+                    <span style="position: absolute; bottom: -8px; left: 0; width: 40px; height: 3px; background: linear-gradient(90deg, #ff5da2, #ff8c42); border-radius: 2px;"></span>
+                </h3>
+                <div style="display: flex; flex-direction: column; gap: 15px;">
+                    <div style="background: #1e293b; padding: 15px; border-radius: 8px; display: flex; align-items: center; gap: 15px;">
+                        <i class="fas fa-envelope-open-text" style="color: #94a3b8; font-size: 1.1rem;"></i>
+                        <span style="color: #ffffff; font-size: 0.9rem;">shivamfulwariya124@gmail.com</span>
+                    </div>
+
+                    <div style="background: #1e293b; padding: 15px; border-radius: 8px; display: flex; align-items: center; gap: 15px;">
+                        <i class="fas fa-mobile-alt" style="color: #94a3b8; font-size: 1.1rem;"></i>
+                        <span style="color: #ffffff; font-size: 0.9rem;">+91 9006861697</span>
+                    </div>
+
+                    <div style="background: #1e293b; padding: 15px; border-radius: 8px; display: flex; align-items: center; gap: 15px;">
+                        <i class="fas fa-map-marker-alt" style="color: #ef4444; font-size: 1.1rem;"></i>
+                        <span style="color: #ffffff; font-size: 0.9rem;">Bihar, Chhapra</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div style="max-width: 1200px; margin: 0 auto; border-top: 1px solid #1e293b; padding-top: 25px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+            <p style="color: #9ca3af; font-size: 0.9rem; margin: 0;">© 2026 Shivam Kumar Singh. All rights reserved.</p>
+            <div style="display: flex; gap: 15px; color: #9ca3af; font-size: 0.9rem;">
+                <a href="#" style="color: #9ca3af; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#9ca3af'">Privacy Policy</a>
+                <span>•</span>
+                <a href="#" style="color: #9ca3af; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#9ca3af'">Terms of Service</a>
+                <span>•</span>
+                <a href="#" style="color: #9ca3af; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#9ca3af'">Sitemap</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AI Chatbot Assistant -->
+    <div id="ai-assistant" style="position: fixed; bottom: 30px; right: 30px; z-index: 1000;">
+        <button id="chatbot-toggle" style="width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, #6366f1, #a855f7); border: none; box-shadow: 0 5px 20px rgba(99, 102, 241, 0.5); cursor: pointer; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+            <i class="fas fa-robot"></i>
+        </button>
+        <div id="chatbot-window" style="display: none; position: absolute; bottom: 80px; right: 0; width: 300px; height: 400px; background: rgba(15, 19, 31, 0.95); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; flex-direction: column; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.5);">
+            <div style="background: linear-gradient(135deg, #6366f1, #a855f7); padding: 15px; display: flex; justify-content: space-between; align-items: center;">
+                <span style="color: white; font-weight: 600;"><i class="fas fa-robot" style="margin-right: 8px;"></i> Cyber AI Assistant</span>
+                <i class="fas fa-times" id="chatbot-close" style="color: white; cursor: pointer;"></i>
+            </div>
+            <div id="chatbot-messages" style="flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px;">
+                <div style="background: rgba(255,255,255,0.1); padding: 10px; border-radius: 8px; color: #fff; font-size: 0.9rem; align-self: flex-start; max-width: 80%;">Hello! I'm Shivam's AI assistant. Ask me anything about his skills or projects!</div>
+            </div>
+            <div style="padding: 15px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; gap: 10px;">
+                <input type="text" id="chatbot-input" placeholder="Type a message..." style="flex: 1; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.2); border-radius: 20px; padding: 8px 15px; color: white; outline: none;">
+                <button id="chatbot-send" style="background: #6366f1; border: none; width: 36px; height: 36px; border-radius: 50%; color: white; cursor: pointer;"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- COMMAND PALETTE -->
+    <div id="command-palette-overlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.8); z-index:20000; align-items:flex-start; justify-content:center; padding-top:100px; backdrop-filter:blur(5px);">
+        <div style="background:#15151e; border:1px solid #334155; width:90%; max-width:600px; border-radius:12px; overflow:hidden; box-shadow:0 20px 50px rgba(0,0,0,0.5);">
+            <div style="display:flex; align-items:center; padding:15px; border-bottom:1px solid #334155;">
+                <i class="fas fa-search" style="color:#6366f1; margin-right:15px; font-size:1.2rem;"></i>
+                <input type="text" id="palette-search" placeholder="Type a command or module... (e.g., 'home', 'projects')" style="background:transparent; border:none; color:white; font-size:1.2rem; width:100%; outline:none;" autocomplete="off">
+                <span style="color:#64748b; font-size:0.8rem; border:1px solid #334155; padding:2px 6px; border-radius:4px;">ESC</span>
+            </div>
+            <div id="palette-results" style="padding:10px; max-height:300px; overflow-y:auto;">
+                <!-- Results dynamically injected -->
+            </div>
+        </div>
+    </div>
+
+    <!-- EXTERNAL SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles-preset-stars@2/tsparticles.preset.stars.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- CUSTOM JS -->
+    <script src="script.js"></script>
+</body>
+</html>
